@@ -24,25 +24,26 @@ By using this repository you acknowledge and approve of the fact that:
 To use this github action, you will need to have a GitHub account and an OpenAI API key. Also you will need to configure a GitHub action workflow.
 
 1. Visit https://platform.openai.com/account/api-keys to generate a new OpenAI API key.
-2. Add new key with a name `OPENAI_API_KEY` as described [here](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository). As a value set generated OpenAi Api key from the step 1
-3. In a repository you want to run this action, create a file: `.github/workflows/chatgpt-code-reviewer.yml` with the next content:
+2. Add new key with a name `OPENAI_API_KEY` as described [here](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository). As a value set generated OpenAi Api key from the step 1 (https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#:~:text=Creating%20secrets%20for%20a%20repository,-To%20create%20secrets&text=On%20GitHub.com%2C%20navigate%20to,and%20variables%2C%20then%20click%20Actions.)
+3. In a repository you want to run this action, create a file: `.github/workflows/chat-gpt-code-reviewer.yml` with the next content:
 
    ```yml
-   name: chatgpt-code-reviewer
-   run-name: chatgpt-code-reviewer
-   on: [pull_request]
-   jobs:
-     chatgpt-code-reviewer:
-       runs-on: ubuntu-latest
-       steps:
-         - name: ChatGPT Review
-           uses: magnificode-ltd/chatgpt-code-reviewer@v0.0.8
-           # with:
-           # model: gpt-3.5-turbo
-           # max_tokens: 4096
-           env:
-             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+name: chat-gpt-code-review
+run-name: chat-gpt-code-reviewer
+on: [pull_request]
+jobs:
+  chat-gpt-code-reviewer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ChatGPT Review
+        uses: ARezaK/chat-gpt-code-review@v1
+        with:
+            model: gpt-4-turbo
+            max_tokens: 4096
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+   
    ```
 
    ### Parameters
