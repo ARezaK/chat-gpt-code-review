@@ -1,4 +1,4 @@
-name: chatgpt-code-reviewer
+name: chatgpt-code-review
 description: GitHub action that adds ChatGPT code review comments to pull requests
 author: ARezaK
 inputs:
